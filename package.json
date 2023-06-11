@@ -1,7 +1,7 @@
 {
   "name": "command-line-inventory-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This command line app tracks inventory of Pokemon cards at a card shop.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,8 +9,7 @@
     "create": "node index.js create",
     "show": "node index.js show",
     "update": "node index.js update",
-    "destroy": "node index.js destroy",
-    "score": "node index.js score"
+    "destroy": "node index.js destroy"
   },
   "keywords": [],
   "author": "Anthony Huarneck",
