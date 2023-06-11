@@ -23,3 +23,26 @@ function show(cards, cardId) {
 
     return foundCard.id + " " + foundCard.name
 }
+
+function destroy(cards, cardId) {
+    const index = cards.findIndex((card) => card.id === cardId);
+    if (index >= 0) {
+        cards.splice(index, 1);
+        return cards
+    } else {
+        console.log("card with that ID cannot be found")
+    }
+}
+
+function update (cards, cardId, updatedCard) {
+    const index = cards.findIndex((card) => card.id === cardId);
+
+    if (index > -1) {
+        cards[index].id = cardId;
+        cards[index].name = updatedCard;
+        cards[index].priceInCents = cardPriceInCents[updatedCard];
+        return cards
+    } else {
+        console.log("Could not find a card with that ID")
+    }
+}
