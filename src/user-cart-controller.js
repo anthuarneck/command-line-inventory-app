@@ -1,13 +1,13 @@
 const { writeJSONFile, readJSONFile } = require("./helpers");
 
-function getCart() {
+function _getCart() {
   const cartCards = readJSONFile("./data", "cart-data.json");
   return cartCards;
 }
 
 function addToCart(cards, cardId, cardQuantity) {
   const foundCard = cards.find((card) => card.id === cardId);
-  let cartedCards = getCart();
+  let cartedCards = _getCart();
   if (foundCard && foundCard.inStock === "In Stock: true") {
     const potentialCard = {
       name: foundCard.name,
@@ -18,6 +18,7 @@ function addToCart(cards, cardId, cardQuantity) {
     return cartedCards;
   } else if (foundCard.inStock === "In Stock: false") {
     console.log("Card is no longer in stock.");
+    return cartedCards;
   }
 }
 

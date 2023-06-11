@@ -27,7 +27,6 @@ const run = () => {
       console.log(allCards);
       break;
     case "create":
-      console.log("Creating new card");
       updatedCardsData = create(cardsData, card);
       writeToFile = true;
       break;

@@ -1,17 +1,22 @@
 const { nanoid } = require("nanoid");
 const { faker } = require("@faker-js/faker");
-const { chalk } = require("chalk");
 
 function create(cards, cardName) {
   const card = {
     id: nanoid(4),
     name: cardName,
-    priceInCents: faker.commerce.price({ min: 1.0, max: 25.0 }),
+    priceInCents: faker.commerce.price({ min: 250, max: 2500, dec: 0 }),
     inStock: "In Stock: " + faker.datatype.boolean(),
     holographic: "Holographic: " + faker.datatype.boolean(),
   };
-  cards.push(card);
-  return cards;
+  if (cardName) {
+    cards.push(card);
+    console.log("Creating new card");
+    return cards;
+  } else {
+    console.log("Error: Try adding name.");
+    return cards;
+  }
 }
 
 function index(cards) {
@@ -34,6 +39,7 @@ function destroy(cards, cardId) {
     return cards;
   } else {
     console.log("Card with that ID cannot be found");
+    return cards;
   }
 }
 
@@ -45,16 +51,19 @@ function update(cards, cardId, updatedCard) {
     return cards;
   } else {
     console.log("Could not find a card with that ID");
+    return cards;
   }
 }
 
-  // function returns cards that are holographic.
+// function returns cards that are holographic.
 function getHolographics(cards) {
-  let holographicCards = cards.filter(card => card.holographic === "Holographic: true");
+  let holographicCards = cards.filter(
+    (card) => card.holographic === "Holographic: true"
+  );
   if (holographicCards) {
     return holographicCards.map((card) => card.id + " " + card.name).join("\n");
   } else {
-    console.log("No holographic cards currently available.")
+    console.log("No holographic cards currently available.");
   }
 }
 

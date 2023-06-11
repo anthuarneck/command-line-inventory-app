@@ -10,6 +10,7 @@
     "show": "node index.js show",
     "update": "node index.js update",
     "destroy": "node index.js destroy",
+    "getHolographics": "node index.js getHolographics",
     "addToCart": "node index.js addToCart",
     "showCart": "node index.js showCart",
     "emptyCart": "node index.js emptyCart"
