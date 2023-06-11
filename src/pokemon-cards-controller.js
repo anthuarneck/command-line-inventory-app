@@ -48,7 +48,15 @@ function update(cards, cardId, updatedCard) {
   }
 }
 
-//filter function by holographic
+  // function returns cards that are holographic.
+function getHolographics(cards) {
+  let holographicCards = cards.filter(card => card.holographic === "Holographic: true");
+  if (holographicCards) {
+    return holographicCards.map((card) => card.id + " " + card.name).join("\n");
+  } else {
+    console.log("No holographic cards currently available.")
+  }
+}
 
 module.exports = {
   create,
@@ -56,4 +64,5 @@ module.exports = {
   show,
   destroy,
   update,
+  getHolographics,
 };

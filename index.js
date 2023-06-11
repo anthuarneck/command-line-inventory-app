@@ -5,6 +5,7 @@ const {
   show,
   destroy,
   update,
+  getHolographics,
 } = require("./src/pokemon-cards-controller");
 const {
   addToCart,
@@ -43,8 +44,11 @@ const run = () => {
       updatedCardsData = destroy(cardsData, card);
       writeToFile = true;
       break;
+    case "getHolographics":
+      const foundCards = getHolographics(cardsData);
+      console.log(foundCards);
+      break;
     case "addToCart":
-      //   if (card)
       updatedCartData = addToCart(cardsData, card, process.argv[4]);
       writeToFile = true;
       break;
@@ -61,12 +65,10 @@ const run = () => {
   }
   if ((writeToFile && action === "addToCart") || action === "emptyCart") {
     console.log("New data detected - Updating Cart...");
-
     writeJSONFile(".", "data/cart-data.json", updatedCartData);
   } else {
     if (writeToFile) {
       console.log("New data detected - Updating DataFile...");
-
       writeJSONFile(".", "data/pokemon-cards-data.json", updatedCardsData);
     }
   }
