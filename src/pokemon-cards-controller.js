@@ -21,7 +21,7 @@ function index(cards) {
 function show(cards, cardId) {
     const foundCard = cards.find((card) => card.id === cardId);
 
-    return foundCard.id + " " + foundCard.name
+    return foundCard.id + " " + foundCard.name + " " + foundCard.inStock
 }
 
 function destroy(cards, cardId) {
@@ -46,3 +46,11 @@ function update (cards, cardId, updatedCard) {
         console.log("Could not find a card with that ID")
     }
 }
+
+module.exports = {
+    create,
+    index, 
+    show,
+    destroy,
+    update
+ }
