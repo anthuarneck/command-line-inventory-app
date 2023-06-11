@@ -7,21 +7,24 @@ function create(cards, cardName) {
     id: nanoid(4),
     name: cardName,
     priceInCents: faker.commerce.price({ min: 1.0, max: 25.0, dec: 2 }),
-    inStock: faker.datatype.boolean(),
-    holographic: faker.datatype.boolean(),
+    inStock: "In Stock: " + faker.datatype.boolean(),
+    holographic: "Holographic: " + faker.datatype.boolean(),
   };
   cards.push(card);
   return cards;
 }
 
-function index(cards, inventory) {
-  return inventory.map((inv) => inv.id + " " + inv.name).join("\n") + "\n" + cards.map((card) => card.id + " " + card.name).join("\n")
+function index(cards) {
+  return cards.map((card) => card.id + " " + card.name).join("\n");
 }
 
 function show(cards, cardId) {
   const foundCard = cards.find((card) => card.id === cardId);
-
-  return foundCard.id + " " + foundCard.name + " " + foundCard.inStock;
+  if (foundCard) {
+    return foundCard.id + " " + foundCard.name + " " + foundCard.inStock;
+  } else {
+    console.log("Card with that ID cannot be found");
+  }
 }
 
 function destroy(cards, cardId) {
@@ -30,7 +33,7 @@ function destroy(cards, cardId) {
     cards.splice(index, 1);
     return cards;
   } else {
-    console.log("card with that ID cannot be found");
+    console.log("Card with that ID cannot be found");
   }
 }
 
@@ -44,6 +47,8 @@ function update(cards, cardId, updatedCard) {
     console.log("Could not find a card with that ID");
   }
 }
+
+//filter function by holographic
 
 module.exports = {
   create,

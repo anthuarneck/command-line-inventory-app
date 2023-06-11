@@ -11,16 +11,15 @@ const run = () => {
   const action = process.argv[2];
   const card = process.argv[3];
   let cardsData = readJSONFile(".", "data/pokemon-cards-data.json");
-  let currentCards = readJSONFile(".", "data/pokemon-cards.json");
   let writeToFile = false;
   let updatedCardsData = [];
   switch (action) {
     case "index":
-      const allCards = index(cardsData, currentCards);
+      const allCards = index(cardsData);
       console.log(allCards);
       break;
     case "create":
-      console.log("CREATING RECIEPT FOR PURCHASE");
+      console.log("Creating receipt for new card purchase");
       updatedCardsData = create(cardsData, card);
       writeToFile = true;
       break;
