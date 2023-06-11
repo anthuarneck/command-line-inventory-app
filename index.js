@@ -6,20 +6,27 @@ const {
   destroy,
   update,
 } = require("./src/pokemon-cards-controller");
+const {
+  addToCart,
+  showCart,
+  emptyCart,
+} = require("./src/user-cart-controller");
 
 const run = () => {
   const action = process.argv[2];
   const card = process.argv[3];
   let cardsData = readJSONFile(".", "data/pokemon-cards-data.json");
+  let cartData = readJSONFile(".", "data/cart-data.json");
   let writeToFile = false;
   let updatedCardsData = [];
+  let updatedCartData = [];
   switch (action) {
     case "index":
       const allCards = index(cardsData);
       console.log(allCards);
       break;
     case "create":
-      console.log("Creating receipt for new card purchase");
+      console.log("Creating new card");
       updatedCardsData = create(cardsData, card);
       writeToFile = true;
       break;
@@ -27,25 +34,41 @@ const run = () => {
       const foundCard = show(cardsData, card);
       console.log(foundCard);
       break;
-
     case "update":
-      console.log(card, "updating...");
+      console.log(card, "Updating...");
       updatedCardsData = update(cardsData, card, process.argv[4]);
       writeToFile = true;
       break;
-
     case "destroy":
       updatedCardsData = destroy(cardsData, card);
       writeToFile = true;
       break;
+    case "addToCart":
+      //   if (card)
+      updatedCartData = addToCart(cardsData, card, process.argv[4]);
+      writeToFile = true;
+      break;
+    case "showCart":
+      const cartedCards = showCart(cartData);
+      console.log(cartedCards);
+      break;
+    case "emptyCart":
+      updatedCartData = emptyCart(cartData);
+      writeToFile = true;
+      break;
     default:
-      console.log("error detected");
+      console.log("Error detected");
   }
+  if ((writeToFile && action === "addToCart") || action === "emptyCart") {
+    console.log("New data detected - Updating Cart...");
 
-  if (writeToFile) {
-    console.log("new data detected - updating...");
+    writeJSONFile(".", "data/cart-data.json", updatedCartData);
+  } else {
+    if (writeToFile) {
+      console.log("New data detected - Updating DataFile...");
 
-    writeJSONFile(".", "data/pokemon-cards-data.json", updatedCardsData);
+      writeJSONFile(".", "data/pokemon-cards-data.json", updatedCardsData);
+    }
   }
 };
 run();

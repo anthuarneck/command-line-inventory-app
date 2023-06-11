@@ -6,7 +6,7 @@ function create(cards, cardName) {
   const card = {
     id: nanoid(4),
     name: cardName,
-    priceInCents: faker.commerce.price({ min: 1.0, max: 25.0, dec: 2 }),
+    priceInCents: faker.commerce.price({ min: 1.0, max: 25.0 }),
     inStock: "In Stock: " + faker.datatype.boolean(),
     holographic: "Holographic: " + faker.datatype.boolean(),
   };
